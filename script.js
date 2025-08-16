@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果是免费模式，所有人都可以访问
             if (pattern.isFree) return true;
             // 如果是付费模式，需要会员权限
-            return authManager.currentUser && authManager.hasPermission();
+            return authManager.currentUser && authManager.hasPermission('premium');
         });
         
         return accessiblePatterns.length > 0;
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 获取用户可访问的付费模式
             const accessiblePaidPatterns = paidPatterns.filter(pattern => {
-                return authManager.currentUser && authManager.hasPermission();
+                return authManager.currentUser && authManager.hasPermission('premium');
             });
             
             // 存储所有视频（用于显示翻页按钮）
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果有多种模式，添加模式信息
             if (stepInfo.patterns.length > 1) {
                 const accessiblePatterns = stepInfo.patterns.filter(pattern => {
-                    return pattern.isFree || authManager.hasPermission();
+                    return pattern.isFree || authManager.hasPermission('premium');
                 });
                 
                 if (accessiblePatterns.length > 0) {
