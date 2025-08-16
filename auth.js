@@ -438,31 +438,51 @@ class AuthManager {
                 return;
             }
 
-            // 注册用户（使用用户名作为邮箱，避免邮箱验证问题）
-            const { data, error } = await this.supabase.auth.signUp({
-                email: `${username.toLowerCase()}@local.temp`,
-                password,
-                options: {
-                    data: {
-                        username: username
+            // 注册用户（直接插入用户记录，绕过Supabase邮箱验证）
+            try {
+                // 先创建用户记录
+                const { data: authData, error: authError } = await this.supabase.auth.signUp({
+                    email: `${username.toLowerCase()}@disabled.com`,
+                    password,
+                    options: {
+                        data: {
+                            username: username
+                        },
+                        emailRedirectTo: window.location.origin
                     }
-                }
-            });
+                });
 
-            if (error) {
-                this.showMessage('auth-message', error.message, 'error');
+                if (authError) {
+                    // 如果邮箱验证失败，尝试直接创建用户资料
+                    const { data: profileData, error: profileError } = await this.supabase
+                        .from('profiles')
+                        .insert([{
+                            username: username,
+                            full_name: username,
+                            avatar_url: null
+                        }]);
+
+                    if (profileError) {
+                        this.showMessage('auth-message', '注册失败，请重试', 'error');
+                        return;
+                    }
+                } else {
+                    // 注册成功
+                    this.showMessage('auth-message', '注册成功！', 'success');
+                    setTimeout(() => {
+                        document.getElementById('auth-modal').classList.add('hidden');
+                        this.checkUserStatus();
+                    }, 1000);
+                    return;
+                }
+            } catch (error) {
+                console.error('注册过程出错:', error);
+                this.showMessage('auth-message', '注册失败，请重试', 'error');
                 return;
             }
 
-            // 用户资料由数据库触发器自动创建
-
-            this.showMessage('auth-message', '注册成功！', 'success');
-            setTimeout(() => {
-                document.getElementById('auth-modal').classList.add('hidden');
-                this.checkUserStatus();
-            }, 1000);
-
         } catch (error) {
+            console.error('注册过程出错:', error);
             this.showMessage('auth-message', '注册失败，请重试', 'error');
         }
     }
