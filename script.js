@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalTitle = document.getElementById('modal-title');
     const descriptionText = document.getElementById('description-text');
     const stepTypeRadios = document.querySelectorAll('input[name="step-type"]');
+    const genderRadios = document.querySelectorAll('input[name="step-category"]');
     const prevGifBtn = document.getElementById('prev-gif');
     const nextGifBtn = document.getElementById('next-gif');
     const videoCounter = document.getElementById('video-counter');
@@ -16,10 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 当前选择的步伐类型 (默认为平行启动)
     let currentStepType = 'parallel';
+    // 当前选择的性别分类 (默认为男单)
+    let currentGender = 'male';
     
     // 初始化点位可见性和步伐列表
     updatePointVisibility();
     renderStepList();
+    
+    // 监听性别分类选择变化
+    genderRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            currentGender = this.value;
+            // 重新渲染步伐列表
+            renderStepList();
+        });
+    });
 
     // 存储点击的点位顺序
     let clickSequence = [];
@@ -91,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 检查步伐访问权限
     function checkStepAccess(stepType, sequence) {
-        const stepInfo = stepConfig.getStepInfo(stepType, sequence);
+        const stepInfo = stepConfig.getStepInfo(currentGender, stepType, sequence);
         
         if (!stepInfo) return false;
         
@@ -108,10 +120,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 渲染步伐列表
     function renderStepList() {
-        // 获取当前选择的步伐类型
-        const selectedStepType = document.querySelector('input[name="step-type"]:checked').value;
-        const config = stepConfig.getStepConfig(selectedStepType);
-        const steps = stepConfig.getSteps(selectedStepType);
+        // 获取当前选择的步伐类型和性别
+        const stepTypeRadio = document.querySelector('input[name="step-type"]:checked');
+        const genderRadio = document.querySelector('input[name="step-category"]:checked');
+        
+        if (!stepTypeRadio || !genderRadio) {
+            console.error('无法获取选择的步伐类型或性别');
+            return;
+        }
+        
+        const selectedStepType = stepTypeRadio.value;
+        const selectedGenderValue = genderRadio.value;
+        
+        // 映射HTML中的性别值到配置文件中的键
+        const genderMapping = {
+            'mens': 'male',
+            'womens': 'female',
+            'doubles': 'male' // 暂时使用男单配置
+        };
+        const selectedGender = genderMapping[selectedGenderValue] || 'male';
+        const config = stepConfig.getStepConfig(selectedGender, selectedStepType);
+        const steps = stepConfig.getSteps(selectedGender, selectedStepType);
         
         let html = `
             <div class="step-type-section">
@@ -120,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
 
         Object.entries(steps).forEach(([sequence, step]) => {
-            const isFree = stepConfig.isStepFree(selectedStepType, sequence);
+            const isFree = stepConfig.isStepFree(selectedGender, selectedStepType, sequence);
             const hasAccess = checkStepAccess(selectedStepType, sequence);
             const indicatorColor = isFree ? 'bg-green-500' : 'bg-purple-500';
             const lockIcon = isFree ? '' : '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>';
@@ -210,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const stepType = currentStepType === 'parallel' ? '平行启动' : '前后启动';
         
         // 从配置系统获取视频列表
-        const stepInfo = stepConfig.getStepInfo(currentStepType, sequence);
+        const stepInfo = stepConfig.getStepInfo(currentGender, currentStepType, sequence);
         
         if (stepInfo && stepInfo.patterns.length > 0) {
             // 分离免费和付费模式
@@ -330,7 +359,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function showVideoModal(sequence, stepType) {
         // 显示第一个视频
         const firstVideo = currentVideoList[0];
-        stepVideo.src = `步伐MP4图/${firstVideo}`;
+        // 根据性别选择不同的视频路径
+        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
+        stepVideo.src = `${videoPath}/${firstVideo}`;
         stepVideo.classList.remove('hidden');
         videoNotice.classList.add('hidden');
         
@@ -338,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         stepVideo.load();
         
         // 获取步伐信息
-        const stepInfo = stepConfig.getStepInfo(currentStepType, sequence);
+        const stepInfo = stepConfig.getStepInfo(currentGender, currentStepType, sequence);
         
         // 设置标题
         modalTitle.textContent = `${stepType}：${stepInfo.name} (${sequence})`;
@@ -411,7 +442,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentVideoIndex = nextIndex;
         const prevVideo = currentVideoList[currentVideoIndex];
-        stepVideo.src = `步伐MP4图/${prevVideo}`;
+        // 根据性别选择不同的视频路径
+        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
+        stepVideo.src = `${videoPath}/${prevVideo}`;
         
         // 重新加载视频以确保正确播放
         stepVideo.load();
@@ -434,7 +467,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentVideoIndex = nextIndex;
         const nextVideo = currentVideoList[currentVideoIndex];
-        stepVideo.src = `步伐MP4图/${nextVideo}`;
+        // 根据性别选择不同的视频路径
+        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
+        stepVideo.src = `${videoPath}/${nextVideo}`;
         
         // 重新加载视频以确保正确播放
         stepVideo.load();
