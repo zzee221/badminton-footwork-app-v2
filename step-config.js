@@ -285,7 +285,7 @@ class StepConfig {
                                     name: '基础步伐',
                                     description: '基础步伐是平行启动反手网前动作的标准版本，注重基础动作的规范性：保持重心稳定，小步快速移动，反手握拍准备充分，适合初学者掌握基本移动节奏。',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-2.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-2.mp4']
                                 }
                             ]
                         },
@@ -297,7 +297,7 @@ class StepConfig {
                                     name: '基础步伐',
                                     description: '基础步伐是平行启动正手网前动作的标准版本，注重右侧移动的流畅性和正手握拍的准确性，保持身体平衡，步幅适中，是正手网前技术的基础。',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-3.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-3.mp4']
                                 }
                             ]
                         },
@@ -309,7 +309,7 @@ class StepConfig {
                                     name: '基础步伐',
                                     description: '基础步伐是平行启动头顶后场动作的核心版本，重点在于向后移动时保持身体平衡，用头顶击球技术处理高远球，是后场防守的基础技术。注重转身协调性和步法的连贯性。',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-4.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-4.mp4']
                                 }
                             ]
                         },
@@ -321,7 +321,7 @@ class StepConfig {
                                     name: '基础步伐',
                                     description: '基础步伐是平行启动正手后场动作的标准版本，注重右后方移动的步法协调性，保持正手击球姿势，是正手后场技术的基础移动方式。强调身体重心的控制和移动的流畅性。',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-5（交叉）.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-5（交叉）.mp4']
                                 }
                             ]
                         },
@@ -332,7 +332,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-6.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-6.mp4']
                                 }
                             ]
                         },
@@ -343,7 +343,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/平行启动/平行启动1-7.mp4']
+                                    videos: ['女单步伐MP4图/平行启动1-7.mp4']
                                 }
                             ]
                         }
@@ -360,7 +360,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动1-2.mp4']
+                                    videos: ['女单步伐MP4图/前后启动1-2.mp4']
                                 }
                             ]
                         },
@@ -371,7 +371,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动1-3.mp4']
+                                    videos: ['女单步伐MP4图/前后启动1-3.mp4']
                                 }
                             ]
                         },
@@ -382,7 +382,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动1-4（马来步）.mp4']
+                                    videos: ['女单步伐MP4图/前后启动1-4（马来步）.mp4']
                                 }
                             ]
                         },
@@ -393,7 +393,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: true,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动1-5.mp4']
+                                    videos: ['女单步伐MP4图/前后启动1-5.mp4']
                                 }
                             ]
                         },
@@ -404,7 +404,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动2-4.mp4']
+                                    videos: ['女单步伐MP4图/前后启动2-4.mp4']
                                 }
                             ]
                         },
@@ -415,7 +415,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动2-5.mp4']
+                                    videos: ['女单步伐MP4图/前后启动2-5.mp4']
                                 }
                             ]
                         },
@@ -426,7 +426,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动3-4.mp4']
+                                    videos: ['女单步伐MP4图/前后启动3-4.mp4']
                                 }
                             ]
                         },
@@ -437,7 +437,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动3-5.mp4']
+                                    videos: ['女单步伐MP4图/前后启动3-5.mp4']
                                 }
                             ]
                         },
@@ -448,7 +448,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动4-2.mp4']
+                                    videos: ['女单步伐MP4图/前后启动4-2.mp4']
                                 }
                             ]
                         },
@@ -459,7 +459,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动4-3.mp4']
+                                    videos: ['女单步伐MP4图/前后启动4-3.mp4']
                                 }
                             ]
                         },
@@ -470,7 +470,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动5-2.mp4']
+                                    videos: ['女单步伐MP4图/前后启动5-2.mp4']
                                 }
                             ]
                         },
@@ -481,7 +481,7 @@ class StepConfig {
                                 {
                                     name: '基础步伐',
                                     isFree: false,
-                                    videos: ['女单步伐MP4图/前后启动/前后启动5-3.mp4']
+                                    videos: ['女单步伐MP4图/前后启动5-3.mp4']
                                 }
                             ]
                         }
