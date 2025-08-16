@@ -27,7 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 监听性别分类选择变化
     genderRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-            currentGender = this.value;
+            // 映射HTML中的性别值到配置文件中的键
+            const genderMapping = {
+                'mens': 'male',
+                'womens': 'female',
+                'doubles': 'male' // 暂时使用男单配置
+            };
+            currentGender = genderMapping[this.value] || 'male';
             // 重新渲染步伐列表
             renderStepList();
         });
@@ -102,8 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 检查步伐访问权限
-    function checkStepAccess(stepType, sequence) {
-        const stepInfo = stepConfig.getStepInfo(currentGender, stepType, sequence);
+    function checkStepAccess(stepType, sequence, gender = null) {
+        // 如果没有指定性别，使用当前选择的性别
+        const targetGender = gender || currentGender;
+        const stepInfo = stepConfig.getStepInfo(targetGender, stepType, sequence);
         
         if (!stepInfo) return false;
         
@@ -150,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         Object.entries(steps).forEach(([sequence, step]) => {
             const isFree = stepConfig.isStepFree(selectedGender, selectedStepType, sequence);
-            const hasAccess = checkStepAccess(selectedStepType, sequence);
+            const hasAccess = checkStepAccess(selectedStepType, sequence, selectedGender);
             const indicatorColor = isFree ? 'bg-green-500' : 'bg-purple-500';
             const lockIcon = isFree ? '' : '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>';
             
@@ -193,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const stepSequence = this.getAttribute('data-step-sequence');
                 
                 // 检查访问权限
-                const hasAccess = checkStepAccess(stepType, stepSequence);
+                const hasAccess = checkStepAccess(stepType, stepSequence, selectedGender);
                 
                 if (!hasAccess) {
                     // 没有访问权限，显示升级提示
@@ -283,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // 检查访问权限
-        const hasAccess = checkStepAccess(currentStepType, sequence);
+        const hasAccess = checkStepAccess(currentStepType, sequence, currentGender);
 
         if (!hasAccess) {
             // 没有访问权限，显示升级提示
