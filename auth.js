@@ -385,7 +385,7 @@ class AuthManager {
 
         try {
             // 根据用户名生成邮箱格式
-            const userEmail = `${username.toLowerCase()}@test.com`;
+            const userEmail = `${username.toLowerCase()}@example.com`;
             console.log('使用生成的邮箱登录:', userEmail);
             
             // 直接使用生成的邮箱登录
@@ -438,8 +438,8 @@ class AuthManager {
                 return;
             }
 
-            // 生成虚拟邮箱（基于用户名，使用标准测试域名）
-            const tempEmail = `${username.toLowerCase()}@test.com`;
+            // 生成虚拟邮箱（基于用户名，使用RFC标准测试域名）
+            const tempEmail = `${username.toLowerCase()}@example.com`;
             
             // 注册用户
             const { data, error } = await this.supabase.auth.signUp({
