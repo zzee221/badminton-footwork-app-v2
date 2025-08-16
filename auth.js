@@ -385,7 +385,7 @@ class AuthManager {
 
         try {
             // 根据用户名生成邮箱格式
-            const userEmail = `${username.toLowerCase()}@badminton-step.local`;
+            const userEmail = `${username.toLowerCase()}@test.com`;
             console.log('使用生成的邮箱登录:', userEmail);
             
             // 直接使用生成的邮箱登录
@@ -439,7 +439,7 @@ class AuthManager {
             }
 
             // 生成虚拟邮箱（基于用户名，使用标准测试域名）
-            const tempEmail = `${username.toLowerCase()}@badminton-step.local`;
+            const tempEmail = `${username.toLowerCase()}@test.com`;
             
             // 注册用户
             const { data, error } = await this.supabase.auth.signUp({
