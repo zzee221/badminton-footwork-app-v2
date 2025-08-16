@@ -367,9 +367,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function showVideoModal(sequence, stepType) {
         // 显示第一个视频
         const firstVideo = currentVideoList[0];
-        // 根据性别选择不同的视频路径
-        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
-        stepVideo.src = `${videoPath}/${firstVideo}`;
+        // 女单步伐的视频路径已经包含完整路径，男单步伐需要添加路径前缀
+        const videoSrc = currentGender === 'female' ? firstVideo : `步伐MP4图/${firstVideo}`;
+        stepVideo.src = videoSrc;
         stepVideo.classList.remove('hidden');
         videoNotice.classList.add('hidden');
         
@@ -450,9 +450,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentVideoIndex = nextIndex;
         const prevVideo = currentVideoList[currentVideoIndex];
-        // 根据性别选择不同的视频路径
-        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
-        stepVideo.src = `${videoPath}/${prevVideo}`;
+        // 女单步伐的视频路径已经包含完整路径，男单步伐需要添加路径前缀
+        const videoSrc = currentGender === 'female' ? prevVideo : `步伐MP4图/${prevVideo}`;
+        stepVideo.src = videoSrc;
         
         // 重新加载视频以确保正确播放
         stepVideo.load();
@@ -475,9 +475,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentVideoIndex = nextIndex;
         const nextVideo = currentVideoList[currentVideoIndex];
-        // 根据性别选择不同的视频路径
-        const videoPath = currentGender === 'female' ? '女单步伐MP4图' : '步伐MP4图';
-        stepVideo.src = `${videoPath}/${nextVideo}`;
+        // 女单步伐的视频路径已经包含完整路径，男单步伐需要添加路径前缀
+        const videoSrc = currentGender === 'female' ? nextVideo : `步伐MP4图/${nextVideo}`;
+        stepVideo.src = videoSrc;
         
         // 重新加载视频以确保正确播放
         stepVideo.load();
